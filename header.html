@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Header</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f4f4;
+        }
+
+        /* header style */
+        header {
+            background: #333;
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            margin: auto;
+        }
+
+        .logo h1 {
+            font-size: 24px;
+        }
+
+        .tagline p {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 12px;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            background: #555;
+            border-radius: 5px;
+        }
+
+        .menu-icon {
+            font-size: 24px;
+            cursor: pointer;
+            display: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .tagline {
+                display: none;
+            }
+
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                right: 20px;
+                background: #444;
+                padding: 10px;
+                border-radius: 5px;
+            }
+
+            nav ul.show {
+                display: block;
+            }
+
+            .menu-icon {
+                display: block;
+            }
+        }
+    </style>
+    <script>
+        //tougle button
+        function toggleMenu() {
+            document.querySelector("nav ul").classList.toggle("show");
+        }
+    </script>
+</head>
+
+<body>
+    <header>
+        <div class="header">
+            <div class="logo">
+                <h1>NumConvert</h1>
+            </div>
+            <div class="tagline">
+                <p>Convert Numbers Instantly & Accurately</p>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Base</a></li>
+                    <li><a href="arithmetic.html">Arithmetic</a></li>
+                    <li><a href="complement.html">Complement</a></li>
+                </ul>
+            </nav>
+            <div class="menu-icon" onclick="toggleMenu()">☰</div>
+        </div>
+    </header>
+</body>
+
+</html>

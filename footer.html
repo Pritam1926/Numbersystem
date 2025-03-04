@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footer</title>
+    <style>
+        /* footer design */
+        footer {
+            background: #222;
+            color: #fff;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .footer-content {
+            flex: 1;
+            min-width: 250px;
+            text-align: left;
+        }
+
+        .footer-links {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin: 8px 0;
+        }
+
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #ff9800;
+        }
+
+        .footer-credit {
+            flex: 1;
+            min-width: 250px;
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        @media (max-width: 768px) {
+            .footer-content h2 {
+                font-size: 1.2em;
+            }
+
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-content,
+            .footer-links,
+            .footer-credit {
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <h2>Number System Converter</h2>
+                <p>Convert between Binary, Octal, Decimal, and Hexadecimal with step-by-step explanation.</p>
+            </div>
+
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Base</a></li>
+                    <li><a href="arithmetic.html">Arithmetic</a></li>
+                    <li><a href="complement.html">Complement</a></li>
+
+                </ul>
+            </div>
+
+            <div class="footer-credit">
+                <p>Designed & Developed by <strong>Pritam Pandit</strong></p>
+                <p>Email: panditpritam399@gmail.com</p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

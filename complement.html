@@ -1,11 +1,251 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Complement</title>
+    <title>Binary Complement</title>
+    <style>
+        /* conversion box style */
+        .hero {
+            text-align: center;
+            padding: 50px 20px;
+            background: linear-gradient(135deg, #4CAF50, #2196F3);
+            color: white;
+        }
+
+        .hero h2 {
+            font-size: 25px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .content {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            gap: 20px;
+            width: 90%;
+            margin: auto;
+        }
+
+        #heading {
+            margin-bottom: 20px;
+        }
+
+        .converter-box {
+            background: white;
+            color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 45%;
+            height: 380px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .input-group label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .input-group select,
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .result-box {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .result-box h3 {
+            font-size: 18px;
+        }
+
+        .result-box p {
+            font-size: 22px;
+            font-weight: bold;
+            color: #4CAF50;
+            overflow: hidden;
+        }
+
+
+        /* Step-by-Step Explanation */
+        .explanation-box {
+            background: #ffffff;
+            color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 50%;
+            text-align: left;
+            font-size: 16px;
+            line-height: 1.6;
+            overflow-y: auto;
+            max-height: 380px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            #heading {
+                font-size: 1.2em;
+            }
+
+            .content {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .converter-box,
+            .explanation-box {
+                width: 100%;
+            }
+        }
+    </style>
+    <script>
+        // script.js
+
+        document.addEventListener("DOMContentLoaded", function () {
+            // Header Load
+            fetch("header.html")
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("header").innerHTML = data;
+                });
+
+            // Footer Load
+            fetch("footer.html")
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("footer").innerHTML = data;
+                });
+        });
+
+        // ✅ Complement Calculation
+function calculateComplement() {
+    let base = parseInt(document.getElementById("baseSelect").value);
+    let num = document.getElementById("numInput").value.trim().toUpperCase();
+
+    if (!isValidNumber(num, base)) {
+        document.getElementById("onesComplement").innerText = "Invalid Input!";
+        document.getElementById("twosComplement").innerText = "Invalid Input!";
+        document.getElementById("complementExplanation").innerText = "Please enter a valid number.";
+        return;
+    }
+
+    let complement1, complement2, explanation;
+
+    if (base === 2) {
+        [complement1, complement2, explanation] = complementStepwise(num, 2);
+    } else if (base === 8) {
+        [complement1, complement2, explanation] = complementStepwise(num, 8);
+    } else if (base === 10) {
+        [complement1, complement2, explanation] = complementStepwise(num, 10);
+    } else if (base === 16) {
+        [complement1, complement2, explanation] = complementStepwise(num, 16);
+    }
+
+    document.getElementById("onesComplement").innerText = complement1;
+    document.getElementById("twosComplement").innerText = complement2;
+    document.getElementById("complementExplanation").innerText = explanation;
+}
+
+// ✅ Function to check valid input
+function isValidNumber(num, base) {
+    const regex = {
+        2: /^[01]+$/,             // Binary: 0, 1
+        8: /^[0-7]+$/,            // Octal: 0-7
+        10: /^[0-9]+$/,           // Decimal: 0-9
+        16: /^[0-9A-Fa-f]+$/      // Hexadecimal: 0-9, A-F
+    };
+    return regex[base].test(num);
+}
+
+// ✅ Universal Complement Calculation with Step-by-Step Subtraction
+function complementStepwise(num, base) {
+    let maxDigit = (base - 1).toString(base).toUpperCase(); // Max digit for subtraction
+    let maxNumber = maxDigit.repeat(num.length); // Create full max number
+    let explanation = `Original Number: ${num}\nSubtract with: ${maxNumber}\n\n`; // Step-1: Max number
+
+    let complement1 = "";
+    for (let i = 0; i < num.length; i++) {
+        let subResult = parseInt(maxNumber[i], base) - parseInt(num[i], base);
+        complement1 += subResult.toString(base).toUpperCase();
+        explanation += `Step ${i + 1}: ${maxNumber[i]} - ${num[i]} = ${subResult.toString(base).toUpperCase()}\n`;
+    }
+
+    let complement2 = (parseInt(complement1, base) + 1).toString(base).toUpperCase();
+    explanation += `\nFinal ${base - 1}'s Complement: ${complement1}\nFinal ${base}'s complement: ${complement2}\n(Add 1 to the ${base - 1}'s Complement)`;
+
+    return [complement1, complement2, explanation];
+}
+
+
+
+    </script>
 </head>
+
 <body>
-    Still working......
+    <div id="header"></div>
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="content">
+                    <!-- Left Side: Complement Calculator -->
+                    <div class="converter-box">
+                        <h2 id="heading">Complement Calculator</h2>
+
+                        <div class="input-group">
+                            <label for="baseSelect">Select Base:</label>
+                            <select id="baseSelect" onchange="calculateComplement()">
+                                <option value="2" selected>Binary</option>
+                                <option value="8">Octal</option>
+                                <option value="10">Decimal</option>
+                                <option value="16">Hexadecimal</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="numInput">Enter Number:</label>
+                            <input type="text" id="numInput" placeholder="Enter number" oninput="calculateComplement()">
+                        </div>
+
+                        <div class="result-box">
+                            <h3>Complement Results:</h3>
+                            <p><strong>1's / 7's / 9's / 15's Complement:</strong> <span id="onesComplement">-</span>
+                            </p>
+                            <p><strong>2's / 8's / 10's / 16's Complement:</strong> <span id="twosComplement">-</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Right Side: Step-by-Step Explanation -->
+                    <div class="explanation-box">
+                        <h3>Step-by-Step Calculation</h3>
+                        <pre id="complementExplanation">Enter a number to see the complement steps.</pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    </main>
+    <div id="footer"></div>
 </body>
+
 </html>
