@@ -102,9 +102,10 @@
 
         /* Responsive */
         @media (max-width: 768px) {
-            .result-box p{
+            .result-box p {
                 font-size: 15px;
             }
+
             #heading {
                 font-size: 1.2em;
             }
@@ -122,7 +123,9 @@
     </style>
     <script>
         // script.js
-
+        function toggleMenu() {
+            document.querySelector("nav ul").classList.toggle("show");
+        }
         document.addEventListener("DOMContentLoaded", function () {
             // Header Load
             fetch("header.html")
@@ -140,63 +143,63 @@
         });
 
         // ✅ Complement Calculation
-function calculateComplement() {
-    let base = parseInt(document.getElementById("baseSelect").value);
-    let num = document.getElementById("numInput").value.trim().toUpperCase();
+        function calculateComplement() {
+            let base = parseInt(document.getElementById("baseSelect").value);
+            let num = document.getElementById("numInput").value.trim().toUpperCase();
 
-    if (!isValidNumber(num, base)) {
-        document.getElementById("onesComplement").innerText = "Invalid Input!";
-        document.getElementById("twosComplement").innerText = "Invalid Input!";
-        document.getElementById("complementExplanation").innerText = "Please enter a valid number.";
-        return;
-    }
+            if (!isValidNumber(num, base)) {
+                document.getElementById("onesComplement").innerText = "Invalid Input!";
+                document.getElementById("twosComplement").innerText = "Invalid Input!";
+                document.getElementById("complementExplanation").innerText = "Please enter a valid number.";
+                return;
+            }
 
-    let complement1, complement2, explanation;
+            let complement1, complement2, explanation;
 
-    if (base === 2) {
-        [complement1, complement2, explanation] = complementStepwise(num, 2);
-    } else if (base === 8) {
-        [complement1, complement2, explanation] = complementStepwise(num, 8);
-    } else if (base === 10) {
-        [complement1, complement2, explanation] = complementStepwise(num, 10);
-    } else if (base === 16) {
-        [complement1, complement2, explanation] = complementStepwise(num, 16);
-    }
+            if (base === 2) {
+                [complement1, complement2, explanation] = complementStepwise(num, 2);
+            } else if (base === 8) {
+                [complement1, complement2, explanation] = complementStepwise(num, 8);
+            } else if (base === 10) {
+                [complement1, complement2, explanation] = complementStepwise(num, 10);
+            } else if (base === 16) {
+                [complement1, complement2, explanation] = complementStepwise(num, 16);
+            }
 
-    document.getElementById("onesComplement").innerText = complement1;
-    document.getElementById("twosComplement").innerText = complement2;
-    document.getElementById("complementExplanation").innerText = explanation;
-}
+            document.getElementById("onesComplement").innerText = complement1;
+            document.getElementById("twosComplement").innerText = complement2;
+            document.getElementById("complementExplanation").innerText = explanation;
+        }
 
-// ✅ Function to check valid input
-function isValidNumber(num, base) {
-    const regex = {
-        2: /^[01]+$/,             // Binary: 0, 1
-        8: /^[0-7]+$/,            // Octal: 0-7
-        10: /^[0-9]+$/,           // Decimal: 0-9
-        16: /^[0-9A-Fa-f]+$/      // Hexadecimal: 0-9, A-F
-    };
-    return regex[base].test(num);
-}
+        // ✅ Function to check valid input
+        function isValidNumber(num, base) {
+            const regex = {
+                2: /^[01]+$/,             // Binary: 0, 1
+                8: /^[0-7]+$/,            // Octal: 0-7
+                10: /^[0-9]+$/,           // Decimal: 0-9
+                16: /^[0-9A-Fa-f]+$/      // Hexadecimal: 0-9, A-F
+            };
+            return regex[base].test(num);
+        }
 
-// ✅ Universal Complement Calculation with Step-by-Step Subtraction
-function complementStepwise(num, base) {
-    let maxDigit = (base - 1).toString(base).toUpperCase(); // Max digit for subtraction
-    let maxNumber = maxDigit.repeat(num.length); // Create full max number
-    let explanation = `Original Number: ${num}\nSubtract from: ${maxNumber}\n\n`; // Step-1: Max number
+        // ✅ Universal Complement Calculation with Step-by-Step Subtraction
+        function complementStepwise(num, base) {
+            let maxDigit = (base - 1).toString(base).toUpperCase(); // Max digit for subtraction
+            let maxNumber = maxDigit.repeat(num.length); // Create full max number
+            let explanation = `Original Number: ${num}\nSubtract from: ${maxNumber}\n\n`; // Step-1: Max number
 
-    let complement1 = "";
-    for (let i = 0; i < num.length; i++) {
-        let subResult = parseInt(maxNumber[i], base) - parseInt(num[i], base);
-        complement1 += subResult.toString(base).toUpperCase();
-        explanation += `Step ${i + 1}: ${maxNumber[i]} - ${num[i]} = ${subResult.toString(base).toUpperCase()}\n`;
-    }
+            let complement1 = "";
+            for (let i = 0; i < num.length; i++) {
+                let subResult = parseInt(maxNumber[i], base) - parseInt(num[i], base);
+                complement1 += subResult.toString(base).toUpperCase();
+                explanation += `Step ${i + 1}: ${maxNumber[i]} - ${num[i]} = ${subResult.toString(base).toUpperCase()}\n`;
+            }
 
-    let complement2 = (parseInt(complement1, base) + 1).toString(base).toUpperCase();
-    explanation += `\nFinal ${base - 1}'s Complement: ${complement1}\nFinal ${base}'s complement: ${complement2}\n(Add 1 to the ${base - 1}'s Complement)`;
+            let complement2 = (parseInt(complement1, base) + 1).toString(base).toUpperCase();
+            explanation += `\nFinal ${base - 1}'s Complement: ${complement1}\nFinal ${base}'s complement: ${complement2}\n(Add 1 to the ${base - 1}'s Complement)`;
 
-    return [complement1, complement2, explanation];
-}
+            return [complement1, complement2, explanation];
+        }
 
 
 
