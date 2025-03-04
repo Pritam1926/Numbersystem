@@ -1,11 +1,261 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arithemetic clculation</title>
+    <meta name="description" content="calculate complement value of any number.">
+    <meta name="keywords"
+        content="number system converter, binary arithmetic, number system arithmetic calculator, binary Addition, binary subtraction, octal arithmetic, hexa-decimal arithmetic, online converter, NumConvert">
+    <meta name="robots" content="index, follow">
+    <title>Number System Arithmetic Calculator</title>
+    <style>
+        /* conversion box style */
+        .hero {
+            text-align: center;
+            padding: 50px 20px;
+            background: linear-gradient(135deg, #4CAF50, #2196F3);
+            color: white;
+        }
+
+        .hero h2 {
+            font-size: 25px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .content {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            gap: 20px;
+            width: 90%;
+            margin: auto;
+        }
+
+        #heading {
+            margin-bottom: 20px;
+        }
+
+        .converter-box {
+            background: white;
+            color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 45%;
+            height: 460px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .input-group label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .input-group select,
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .result-box {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .result-box h3 {
+            font-size: 18px;
+        }
+
+        .result-box p {
+            font-size: 22px;
+            font-weight: bold;
+            color: #4CAF50;
+            overflow: hidden;
+        }
+
+
+        /* Step-by-Step Explanation */
+        .explanation-box {
+            background: #ffffff;
+            color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 50%;
+            text-align: left;
+            font-size: 16px;
+            line-height: 1.6;
+            overflow-y: auto;
+            max-height: 380px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            #heading {
+                font-size: 1.2em;
+            }
+
+            .content {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .converter-box,
+            .explanation-box {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
+
 <body>
-    Still working......
+    <div id="header"></div>
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="content">
+                    <!-- Left Side: Arithmetic Box -->
+                    <div class="converter-box">
+                        <h2 id="heading">Number System Arithmetic Calculator</h2>
+
+                        <div class="input-group">
+                            <label for="baseSelect">Select Number Base:</label>
+                            <select id="baseSelect" onchange="calculate()">
+                                <option value="2">Binary</option>
+                                <option value="8">Octal</option>
+                                <option value="10" selected>Decimal</option>
+                                <option value="16">Hexadecimal</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="operation">Choose Operation:</label>
+                            <select id="operation" onchange="calculate()">
+                                <option value="add" selected>Addition (+)</option>
+                                <option value="sub">Subtraction (-)</option>
+                                <option value="mul">Multiplication (×)</option>
+                                <option value="div">Division (÷)</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="num1">Enter First Number:</label>
+                            <input type="text" id="num1" placeholder="Enter number" oninput="calculate()">
+                        </div>
+
+                        <div class="input-group">
+                            <label for="num2">Enter Second Number:</label>
+                            <input type="text" id="num2" placeholder="Enter number" oninput="calculate()">
+                        </div>
+
+                        <div class="result-box">
+                            <h3>Result:</h3>
+                            <p id="result">-</p>
+                        </div>
+                    </div>
+
+                    <!-- Right Side: Step-by-Step Explanation -->
+                    <div class="explanation-box">
+                        <h3>Step-by-Step Calculation</h3>
+                        <pre id="explanation">Enter numbers to see the calculation steps.</pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <div id="footer"></div>
+    <script>
+        // script.js
+        function toggleMenu() {
+            document.querySelector("nav ul").classList.toggle("show");
+        }
+        document.addEventListener("DOMContentLoaded", function () {
+            // Header Load
+            fetch("header.html")
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("header").innerHTML = data;
+                });
+
+            // Footer Load
+            fetch("footer.html")
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("footer").innerHTML = data;
+                });
+        });
+
+        //calculate arithmetic
+        function calculate() {
+            let base = parseInt(document.getElementById("baseSelect").value);
+            let num1 = document.getElementById("num1").value.trim();
+            let num2 = document.getElementById("num2").value.trim();
+            let operation = document.getElementById("operation").value;
+
+            if (!isValidNumber(num1, base) || !isValidNumber(num2, base)) {
+                document.getElementById("result").innerText = "Invalid Input!";
+                document.getElementById("explanation").innerText = "Please enter valid numbers for the chosen base.";
+                return;
+            }
+
+            let decimalNum1 = parseInt(num1, base);
+            let decimalNum2 = parseInt(num2, base);
+            let resultDecimal, explanation;
+
+            switch (operation) {
+                case "add":
+                    resultDecimal = decimalNum1 + decimalNum2;
+                    explanation = `${num1} + ${num2} = ${resultDecimal.toString(base).toUpperCase()} in base ${base}`;
+                    break;
+                case "sub":
+                    resultDecimal = decimalNum1 - decimalNum2;
+                    explanation = `${num1} - ${num2} = ${resultDecimal.toString(base).toUpperCase()} in base ${base}`;
+                    break;
+                case "mul":
+                    resultDecimal = decimalNum1 * decimalNum2;
+                    explanation = `${num1} × ${num2} = ${resultDecimal.toString(base).toUpperCase()} in base ${base}`;
+                    break;
+                case "div":
+                    if (decimalNum2 === 0) {
+                        document.getElementById("result").innerText = "Error!";
+                        document.getElementById("explanation").innerText = "Division by zero is not allowed.";
+                        return;
+                    }
+                    resultDecimal = Math.floor(decimalNum1 / decimalNum2);
+                    explanation = `${num1} ÷ ${num2} = ${resultDecimal.toString(base).toUpperCase()} in base ${base}`;
+                    break;
+            }
+
+            document.getElementById("result").innerText = "Result: " + resultDecimal.toString(base).toUpperCase();
+            document.getElementById("explanation").innerText = explanation;
+        }
+
+        function isValidNumber(num, base) {
+            const regex = {
+                2: /^[01]+$/,             // Binary: 0, 1
+                8: /^[0-7]+$/,            // Octal: 0-7
+                10: /^[0-9]+$/,           // Decimal: 0-9
+                16: /^[0-9A-Fa-f]+$/      // Hexadecimal: 0-9, A-F
+            };
+            return regex[base].test(num);
+        }
+    </script>
+
 </body>
+
 </html>
