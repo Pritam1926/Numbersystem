@@ -123,7 +123,9 @@
     </style>
     <script>
         // script.js
-
+        function toggleMenu() {
+            document.querySelector("nav ul").classList.toggle("show");
+        }
         document.addEventListener("DOMContentLoaded", function () {
             // Header Load
             fetch("header.html")
