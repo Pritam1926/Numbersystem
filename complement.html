@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Binary Complement</title>
+    <title>Complement Calculator</title>
     <style>
         /* conversion box style */
         .hero {
@@ -183,7 +183,7 @@ function isValidNumber(num, base) {
 function complementStepwise(num, base) {
     let maxDigit = (base - 1).toString(base).toUpperCase(); // Max digit for subtraction
     let maxNumber = maxDigit.repeat(num.length); // Create full max number
-    let explanation = `Original Number: ${num}\nSubtract with: ${maxNumber}\n\n`; // Step-1: Max number
+    let explanation = `Original Number: ${num}\nSubtract from: ${maxNumber}\n\n`; // Step-1: Max number
 
     let complement1 = "";
     for (let i = 0; i < num.length; i++) {
