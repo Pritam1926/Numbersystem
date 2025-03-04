@@ -1,102 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Number System Converter</title>
+    <title>Number System Converter - Binary, Octal, Decimal, Hex</title>
+    <meta name="description"
+        content="Convert numbers between Binary, Octal, Decimal, and Hexadecimal with step-by-step explanation.">
+    <meta name="keywords"
+        content="number system converter, binary to decimal, decimal to hex, octal to binary, base converter">
+    <meta name="author" content="Pritam Pandit">
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
 </head>
+
 <body>
 
-<header>
-    <div class="container">
-        <div class="logo">
-            <h1>NumConvert</h1>
-        </div>
-        <div class="tagline">
-            <p>Convert Numbers Instantly & Accurately</p>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="arithmetic.html">Arithmetic</a></li>
-                <li><a href="complement.html">Complement</a></li>
-            </ul>
-        </nav>
-        <div class="menu-icon" onclick="toggleMenu()">☰</div>
-    </div>
-</header>
-
-<main>
-    <section class="hero">
+    <header>
         <div class="container">
-            <div class="content">
-                <!-- Left Side: Conversion Box -->
-                <div class="converter-box">
-                    <h1 id="heading">Number System Conversion</h1>
-                    <div class="input-group">
-                        <label for="fromBase">Convert From:</label>
-                        <select id="fromBase">
-                            <option value="2">Binary</option>
-                            <option value="8">Octal</option>
-                            <option value="10" selected>Decimal</option>
-                            <option value="16">Hexadecimal</option>
-                        </select>
+            <div class="logo">
+                <h1>NumConvert</h1>
+            </div>
+            <div class="tagline">
+                <p>Convert Numbers Instantly & Accurately</p>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="arithmetic.html">Arithmetic</a></li>
+                    <li><a href="complement.html">Complement</a></li>
+                </ul>
+            </nav>
+            <div class="menu-icon" onclick="toggleMenu()">☰</div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="content">
+                    <!-- Left Side: Conversion Box -->
+                    <div class="converter-box">
+                        <h2 id="heading">Number System Conversion</h1>
+                        <div class="input-group">
+                            <label for="fromBase">Convert From:</label>
+                            <select id="fromBase">
+                                <option value="2">Binary</option>
+                                <option value="8">Octal</option>
+                                <option value="10" selected>Decimal</option>
+                                <option value="16">Hexadecimal</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="numberInput">Enter Number:</label>
+                            <input type="text" id="numberInput" placeholder="Enter number" oninput="convertNumber()">
+                        </div>
+
+                        <div class="input-group">
+                            <label for="toBase">Convert To:</label>
+                            <select id="toBase">
+                                <option value="2">Binary</option>
+                                <option value="8">Octal</option>
+                                <option value="10">Decimal</option>
+                                <option value="16">Hexadecimal</option>
+                            </select>
+                        </div>
+
+                        <div class="result-box">
+                            <h3>Converted Result:</h3>
+                            <p id="result">-</p>
+                        </div>
                     </div>
-    
-                    <div class="input-group">
-                        <label for="numberInput">Enter Number:</label>
-                        <input type="text" id="numberInput" placeholder="Enter number" oninput="convertNumber()">
+
+                    <!-- Right Side: Step-by-Step Explanation -->
+                    <div class="explanation-box">
+                        <h3>Step-by-Step Calculation</h3>
+                        <pre id="explanation">Enter a number to see the conversion steps.</pre>
                     </div>
-    
-                    <div class="input-group">
-                        <label for="toBase">Convert To:</label>
-                        <select id="toBase">
-                            <option value="2">Binary</option>
-                            <option value="8">Octal</option>
-                            <option value="10">Decimal</option>
-                            <option value="16">Hexadecimal</option>
-                        </select>
-                    </div>
-    
-                    <div class="result-box">
-                        <h3>Converted Result:</h3>
-                        <p id="result">-</p>
-                    </div>
-                </div>
-    
-                <!-- Right Side: Step-by-Step Explanation -->
-                <div class="explanation-box">
-                    <h3>Step-by-Step Calculation</h3>
-                    <pre id="explanation">Enter a number to see the conversion steps.</pre>
                 </div>
             </div>
-        </div>
-    </section>          
-</main>
+        </section>
+    </main>
 
-<footer>
-    <div class="footer-container">
-        <div class="footer-content">
-            <h2>Number System Converter</h2>
-            <p>Convert between Binary, Octal, Decimal, and Hexadecimal with step-by-step explanation.</p>
-        </div>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <h2>Number System Converter</h2>
+                <p>Convert between Binary, Octal, Decimal, and Hexadecimal with step-by-step explanation.</p>
+            </div>
 
-        <div class="footer-links">
-            <h3>Quick Links</h3>
-            <ul>
-                <li><a href="arithmetic.html">Arithmetic</a></li>
-                <li><a href="complement.html">Complement</a></li>
-               
-            </ul>
-        </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="arithmetic.html">Arithmetic</a></li>
+                    <li><a href="complement.html">Complement</a></li>
 
-        <div class="footer-credit">
-            <p>Designed & Developed by <strong>Pritam Pandit</strong></p>
-            <p>Email: panditpritam399@gmail.com</p>
+                </ul>
+            </div>
+
+            <div class="footer-credit">
+                <p>Designed & Developed by <strong>Pritam Pandit</strong></p>
+                <p>Email: panditpritam399@gmail.com</p>
+            </div>
         </div>
-    </div>
-</footer>
+    </footer>
 
 </body>
+
 </html>
